@@ -26,8 +26,9 @@ class LocalFileGatewayTest {
             assertEquals(gateway.sha256(file.path), gateway.sha256(copied.path))
 
             val moved = gateway.move(copied.path, archive.toString())
-            assertTrue(Files.exists(moved.path))
-            assertFalse(Files.exists(copied.path))
+            assertEquals(archive.resolve("hello.txt").toString(), moved.path)
+            assertTrue(Files.exists(archive.resolve("hello.txt")))
+            assertFalse(Files.exists(right.resolve("hello.txt")))
         } finally {
             Files.walk(root).sorted(Comparator.reverseOrder()).forEach(Files::deleteIfExists)
         }
