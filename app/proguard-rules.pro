@@ -1,0 +1,4 @@
+-keep class dev.themanager.app.privilege.PrivilegedFileService { public <init>(...); *; }
+-keep class dev.themanager.app.privilege.RemoteFile { *; }
+-keep class rikka.shizuku.** { *; }
+-dontwarn org.bouncycastle.**
