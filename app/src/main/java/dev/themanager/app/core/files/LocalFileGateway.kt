@@ -119,7 +119,7 @@ class LocalFileGateway : FileGateway {
         Files.readAllBytes(target)
     }
 
-    override suspend fun writeBytesAtomically(path: String, data: ByteArray) = withContext(Dispatchers.IO) {
+    override suspend fun writeBytesAtomically(path: String, data: ByteArray): Unit = withContext(Dispatchers.IO) {
         val target = Paths.get(path).toAbsolutePath().normalize()
         val parent = target.parent ?: throw FileOperationException("Destino inválido.")
         val temp = Files.createTempFile(parent, ".themanager-", ".tmp")
@@ -137,6 +137,7 @@ class LocalFileGateway : FileGateway {
             Files.deleteIfExists(temp)
             throw FileOperationException("Não foi possível salvar o arquivo.", error)
         }
+        Unit
     }
 
     override suspend fun sha256(path: String): String = withContext(Dispatchers.IO) {
