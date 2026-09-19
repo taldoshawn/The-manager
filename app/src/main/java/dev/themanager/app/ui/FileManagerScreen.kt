@@ -27,7 +27,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.weight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -539,7 +538,7 @@ private fun FileActionBar(
     var moreMenu by remember { mutableStateOf(false) }
     NavigationBar(modifier = Modifier.navigationBarsPadding()) {
         Box {
-            NavigationBarItem(
+            this@NavigationBar.NavigationBarItem(
                 selected = false,
                 enabled = enabled,
                 onClick = { newMenu = true },
@@ -581,7 +580,7 @@ private fun FileActionBar(
             label = { Text("Excluir") },
         )
         Box {
-            NavigationBarItem(
+            this@NavigationBar.NavigationBarItem(
                 selected = false,
                 enabled = enabled,
                 onClick = { moreMenu = true },
